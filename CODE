@@ -1,0 +1,25 @@
+import json
+from web3 import Web3
+from eth_account import Account
+
+def generate_ethereum_account():
+    # Generate a new Ethereum account
+    account = Account.create()
+    return {
+        'address': account.address,
+        'private_key': account.privateKey.hex()
+    }
+
+def save_account_to_json(account_data, filename):
+    with open(filename, 'w') as json_file:
+        json.dump(account_data, json_file, indent=4)
+    print(f"Account saved to {filename}")
+
+def main():
+    account_data = generate_ethereum_account()
+    print(f"Generated account:\nAddress: {account_data['address']}\nPrivate Key: {account_data['private_key']}")
+    filename = 'ethereum_account.json'
+    save_account_to_json(account_data, filename)
+
+if __name__ == "__main__":
+    main()
