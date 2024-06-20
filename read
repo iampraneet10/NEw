@@ -1,0 +1,15 @@
+import json
+from eth_account import Account
+def load_address_from_json(filename):
+    with open(filename, 'r') as json_file:
+        account_data = json.load(json_file)
+    private_key = account_data['private_key']
+    account = Account.from_key(private_key)
+    return account.address
+def main():
+    filename = 'ethereum_account.json'
+    public_address = load_address_from_json(filename)
+    print(f"Public address: {public_address}")
+
+if __name__ == "__main__":
+    main()
